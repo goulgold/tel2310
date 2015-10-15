@@ -8,7 +8,7 @@ buffer_size = [50, 100, 150]
 
 total_result = open("./result/total.result","w")
 
-head1 = "\\nextgroupplot[title=$\lambda$=%s, $\mu$=%s, $n$=%s]\n"
+head1 = "\\nextgroupplot[title={$\lambda$=%s, $\mu$=%s, $n$=%s}]\n"
 head2 = "\\addplot coordinates {\n"
 tail = "};\n"
 
