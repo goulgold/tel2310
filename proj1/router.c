@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
     file_dropped = fopen(filename, "w");
 
     // Start Simulating the events
-    srand(time(NULL));
+    srand(in_rate * out_rate * buffer_size);
     for (int i = 0; i < 1000000; ++i) {
         Event(in_rate, out_rate, &router);
         if (i % INTERVAL == 0) {
