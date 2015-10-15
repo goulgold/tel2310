@@ -3,7 +3,7 @@
 
 int main() {
     double EstimatedRTT = 90.0;
-    double DevRTT = 25;
+    double DevRTT = 25.0;
     double TimeoutInterval;
     double a = 0.1;
     double b = 0.25;
