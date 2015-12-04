@@ -1,22 +1,34 @@
 #!/usr/bin/env python
 
 # lookup asn number, and print result
-import pyasn
+from ipwhois import IPWhois
 import re
+import sys
 
-iptest = re.compile('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
+iptest = re.compile('^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$')
 
-ip1 = '192.168.1.1'
+def testip(str):
+    if iptest.match(str):
+        return True
+    else:
+        return False
 
-if iptest.match(ip1):
-    print 'true'
-else:
-    print 'false'
+f = open(sys.argv[1], 'r')
 
-f = open('result.log', 'r')
-
-str_list = f.readline().split(' ')
-str_list = f.readline().split(' ')
-str_list = f.readline().split(' ')
-
-print str_list
+for line in f:
+    str_list = line.split(' ')
+    for str in str_list:
+        if testip(str):
+            try:
+                asn = ''
+                obj = IPWhois(str)
+                results = obj.lookup()
+                asn += ' ('
+                asn += results['asn']
+                asn += ', '
+                asn += results['nets'][0]['description']
+                asn += ')'
+                line = line + asn
+            except:
+                continue
+    print line,
